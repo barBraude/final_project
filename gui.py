@@ -41,7 +41,11 @@ class MyWindow(QWidget):
             # Insert the data into the model and train it
             svm_loaded_model = joblib.load('svm_Model_24.12.pkl')
             model = svm_loaded_model.best_estimator_
+
+            if data.ndim != 2:
+                data = [data]
             pred = model.predict(data)
+
 
             # Clear the model
             self.model.clear()
