@@ -25,13 +25,37 @@ class MyWindow(QWidget):
         # Set the text of the QLabel widget
         self.title_label.setText("Welcome to CVD risk prediction application")
         # Create a label to display the image
-        self.image_label = QLabel(self)
-        self.image_label.setGeometry(100,100,300,168)
-        # Create a QPixmap object and load the image from a file
-        pixmap = QPixmap()
-        pixmap.load("back-pain-r.png")
-        self.image_label.setPixmap(pixmap)
+        # self.image_label = QLabel(self)
+        # self.image_label.setGeometry(100,100,300,168)
+        # # Create a QPixmap object and load the image from a file
+        # pixmap = QPixmap()
+        # pixmap.load("back-pain-r.png")
+        # self.image_label.setPixmap(pixmap)
+       
 
+     
+        # Create a QPalette object
+        palette = QPalette()
+
+        # Load the image and create a QBrush object with it
+        image = QImage(QPixmap("back-pain-r.png"))
+        #brush = QBrush()
+        pixmap = QPixmap('image.png')
+       # pixmap.setTextureRepeat(False)
+        brush = QBrush(pixmap)
+        # Set the brush as the background for the palette
+        brush.setTextureImage(image)
+
+        # Disable repeating
+        #pixmap.setTextureRepeat(False)
+
+        # Set the brush as the background for the palette
+        palette.setBrush(QPalette.Background, brush)
+        brush.setTransform(QTransform().scale(1,1))
+        # Apply the palette to the application
+        app.setPalette(palette)
+        
+        
        
         self.opening_button = QPushButton('Go to prediction', self.opening_page)
         # Set the button location and size
@@ -113,7 +137,7 @@ class MyWindow(QWidget):
     def go_to_main_page(self):
         self.stacked_widget.setCurrentIndex(1)
         self.title_label.hide()
-        self.image_label.hide()
+        #self.image_label.hide()
 
 
 if __name__ == '__main__':
