@@ -55,7 +55,7 @@ class MyWindow(QWidget):
         self.main_page = QWidget()
         
         # Create a button to open the file dialog
-        self.open_csv_button = QPushButton('Open CSV', self)
+        self.open_csv_button = QPushButton('Load CSV file', self)
 
         self.open_csv_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #EEEEEA")
         self.open_csv_button.clicked.connect(self.open_csv)
