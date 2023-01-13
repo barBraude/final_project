@@ -141,6 +141,7 @@ class MyWindow(QWidget):
          self.title_label.show()
 
     def setResultBackgroundColor(self,window,color):
+        #change typo in meduim
         color_dict = {
             "Low": "#9ED6A5",
             "Meduim": "#E8EDA9",
