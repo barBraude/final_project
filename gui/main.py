@@ -16,71 +16,71 @@ class MyWindow(QWidget):
         self.opening_page = QWidget()
         #create title label
         self.title_label = QLabel(self)
-        self.title_label.setGeometry(20,10,520,100)
-        self.title_label.setTextFormat(Qt.RichText)
-        font = QFont("Helvetica", 14)
-
+        self.title_label.setGeometry(10,20,300,100)
+        self.text_edit=QTextEdit()
+        font = QFont("Segoe UI ", 7)
         # Set the font of the QLabel widget
         self.title_label.setFont(font)
         # Set the text of the QLabel widget
-        self.title_label.setText("Welcome to CVD risk prediction application")
-        # Create a label to display the image
-        # self.image_label = QLabel(self)
-        # self.image_label.setGeometry(100,100,300,168)
-        # # Create a QPixmap object and load the image from a file
-        # pixmap = QPixmap()
-        # pixmap.load("back-pain-r.png")
-        # self.image_label.setPixmap(pixmap)
-       
-
-     
+        self.title_label.setText("<h1>Welcome to CVD risk prediction App<h1>")
+        self.title_label.setWordWrap(True)
         # Create a QPalette object
         palette = QPalette()
-
         # Load the image and create a QBrush object with it
-        image = QImage(QPixmap("back-pain-r.png"))
+        image = QImage(QPixmap("back-pain-2.jpg"))
         #brush = QBrush()
-        pixmap = QPixmap('image.png')
-       # pixmap.setTextureRepeat(False)
+        pixmap = QPixmap(image)
+       
         brush = QBrush(pixmap)
         # Set the brush as the background for the palette
         brush.setTextureImage(image)
 
         # Disable repeating
-        #pixmap.setTextureRepeat(False)
+        #brush.setTextureRepeat(False)
 
         # Set the brush as the background for the palette
         palette.setBrush(QPalette.Background, brush)
         brush.setTransform(QTransform().scale(1,1))
         # Apply the palette to the application
-        app.setPalette(palette)
+        self.opening_page.setPalette(palette)
+        self.opening_page.setAutoFillBackground(True)
         
-        
-       
         self.opening_button = QPushButton('Go to prediction', self.opening_page)
         # Set the button location and size
         self.opening_button.setGeometry(160, 400, 150, 40)
-        self.opening_button.setStyleSheet("font: 9pt Helvetica;")
+        self.opening_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #F0F0E4")
         self.opening_button.clicked.connect(self.go_to_main_page)
         # Create the main page
         self.main_page = QWidget()
         
         # Create a button to open the file dialog
-        self.button = QPushButton('Open CSV', self)
-        self.button.clicked.connect(self.open_csv)
+        self.open_csv_button = QPushButton('Open CSV', self)
 
+        self.open_csv_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #F0F0E4")
+        self.open_csv_button.clicked.connect(self.open_csv)
+        
+        self.back_to_open_screen= QPushButton('Back to main screen', self)
+        self.back_to_open_screen.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #F0F0E4")
+        self.back_to_open_screen.clicked.connect(self.go_back_to_open_screen)
+       
+        #add label for descriptin
+        self.desc_label = QLabel(self)
+        self.desc_label.setText("""Select data sheet of format type 'CSV' to load your data. After loading the data, a risk category will be presented based on your data""")
+        self.desc_label.setStyleSheet("font: 11pt Segoe UI Semibold; background-color: #F0F0E4")
+        self.desc_label.setWordWrap(True)
         # Create a table view and a model
         self.table_view = QTableView()
         self.model = QStandardItemModel(self)
-
         # Set the model for the table view
         self.table_view.setModel(self.model)
 
         # Create a layout and add the table view and button
         layout = QVBoxLayout(self.main_page)
         layout.addWidget(self.table_view)
-        layout.addWidget(self.button)
-
+        layout.addWidget(self.desc_label)
+        layout.addWidget(self.open_csv_button)
+        layout.addWidget(self.back_to_open_screen)
+        
         # Add the pages to the stacked widget
         self.stacked_widget.addWidget(self.opening_page)
         self.stacked_widget.addWidget(self.main_page)
@@ -99,6 +99,7 @@ class MyWindow(QWidget):
 
     def open_csv(self):
         # Open the file dialog and get the selected file
+        self.desc_label.hide()
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly
         file_name, _ = QFileDialog.getOpenFileName(
@@ -131,14 +132,17 @@ class MyWindow(QWidget):
                 self.model.appendRow(items)
 
             # Resize the columns
-            self.table_view.resizeColumnsToContents()
+            #self.table_view.resizeColumnsToContents()
             # print(pred)
 
     def go_to_main_page(self):
         self.stacked_widget.setCurrentIndex(1)
         self.title_label.hide()
-        #self.image_label.hide()
-
+        
+    
+    def go_back_to_open_screen(self):
+         self.stacked_widget.setCurrentIndex(0)
+         self.title_label.show()
 
 if __name__ == '__main__':
     app = QApplication([])
