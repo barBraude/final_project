@@ -144,7 +144,7 @@ class MyWindow(QWidget):
         #change typo in meduim
         color_dict = {
             "Low": "#9ED6A5",
-            "Meduim": "#E8EDA9",
+            "Meduim": "#FFF2CC",
             "High": "#FF7575"
         }
         try:
