@@ -115,7 +115,7 @@ class MyWindow(QWidget):
             # ...
 
             # Insert the data into the model and train it
-            svm_loaded_model = joblib.load('svm_Model_24.12.pkl')
+            svm_loaded_model = joblib.load('model/svm_model.pkl')
             model = svm_loaded_model.best_estimator_
 
             if data.ndim != 2:
@@ -144,7 +144,7 @@ class MyWindow(QWidget):
         #change typo in meduim
         color_dict = {
             "Low": "#9ED6A5",
-            "Meduim": "#FFF2CC",
+            "Medium": "#FFF2CC",
             "High": "#FF7575"
         }
         try:
