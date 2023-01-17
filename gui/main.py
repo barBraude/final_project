@@ -1,8 +1,10 @@
 import joblib
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from PyQt5 import QtGui
 from PyQt5.QtGui import *
 from PyQt5.QtGui import QFont
+import PyQt5.QtWidgets as QtWidgets
+import PyQt5.QtCore as QtCore
 
 
 
@@ -16,15 +18,18 @@ class MyWindow(QWidget):
         self.opening_page = QWidget()
         #create title label
         self.title_label = QLabel(self)
-        self.title_label.setGeometry(45,120,400,100)
+        self.title_label.setGeometry(45,150,400,120)
         self.text_edit=QTextEdit()
-        font = QFont("Segoe UI ", 10)
-        # Set the font of the QLabel widget
-        self.title_label.setFont(font)
+        # font = QFont("Segoe UI ", 10)
+        # # Set the font of the QLabel widget
+        # self.title_label.setFont(font)
+       
         # Set the text of the QLabel widget
+        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
         self.title_label.setText("<h1>Welcome to CVD risk prediction App<h1>")
         self.title_label.setWordWrap(True)
-        self.title_label.setStyleSheet("color: #E3DECB;")
+        self.set_font(self.title_label)
+        # self.title_label.setStyleSheet("color: #E3DECB;")
         # Create a QPalette object
         palette = QPalette()
         # Load the image and create a QBrush object with it
@@ -56,19 +61,20 @@ class MyWindow(QWidget):
         
         # Create a button to open the file dialog
         self.open_csv_button = QPushButton('Load CSV file', self)
-
-        self.open_csv_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #EEEEEA")
+        self.open_csv_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #FFFFFF")
         self.open_csv_button.clicked.connect(self.open_csv)
         
         self.back_to_open_screen= QPushButton('Back to main screen', self)
-        self.back_to_open_screen.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #EEEEEA")
+        self.back_to_open_screen.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #FFFFFF")
         self.back_to_open_screen.clicked.connect(self.go_back_to_open_screen)
        
         #add label for descriptin
         self.desc_label = QLabel(self)
         self.desc_label.setText("""Select data sheet of format type 'CSV' to load your data. \nAfter loading the data, a risk category will be presented based on your data""")
-        self.desc_label.setStyleSheet("font: 11pt Segoe UI Semibold;")
+        self.set_font(self.desc_label)
         self.desc_label.setWordWrap(True)
+
+        self.main_page.setStyleSheet("background-color: black")
         
         #result_label
         self.res_label = QLabel(self)
@@ -123,12 +129,24 @@ class MyWindow(QWidget):
             pred = model.predict(data)
 
             pred_result = ', '.join(pred)
-            self.res_label.setStyleSheet("QLabel { text-align: center; }")
             self.res_label.setText(" Your predicted risk category is: \n " + pred_result)
             self.setResultBackgroundColor(self.res_label,pred_result)
-            # print(pred_result)
-            # Clear the model
+            self.set_font(self.res_label)
+
+            
             self.model.clear()
+
+    def set_font(self,widget):
+        font = QtGui.QFont()
+        # font.setFamily('cursive')
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setItalic(True)
+
+        widget.setFont(font)
+        widget.setStyleSheet("color: #FFFFFF;")
+        widget.setAlignment(QtCore.Qt.AlignCenter)
+
 
 
     def go_to_main_page(self):
@@ -144,11 +162,13 @@ class MyWindow(QWidget):
         #change typo in meduim
         color_dict = {
             "Low": "#9ED6A5",
-            "Medium": "#FFF2CC",
-            "High": "#FF7575"
+            "Medium": "#FFE4B0",
+            "High": "#FF7575",
+            "black": "#000000"
         }
         try:
             window.setStyleSheet("background-color: {}".format(color_dict[color]))
+            self.main_page.setStyleSheet("background-color: {}".format(color_dict[color]))
         except KeyError:
             print("Invalid color")
 
@@ -156,7 +176,7 @@ if __name__ == '__main__':
     app = QApplication([])
     window = MyWindow()
     # Set the window title 
-    title = "CVD risk pediction"
+    title = "CVD Risk Prediction"
     window.setWindowTitle(title)
     window.show()
     # Set the window dimensions
