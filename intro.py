@@ -16,11 +16,11 @@ class MyWindow(QWidget):
         self.layout = QHBoxLayout()
         self.left_image = QLabel(self)
         self.left_image.setPixmap(QPixmap('sport_man.jpg'))
-        self.left_image.setFixedSize(1000, 400)
+        self.left_image.setFixedSize(100, 400)
         self.layout.addWidget(self.left_image)
         self.right_image = QLabel(self)
         self.right_image.setPixmap(QPixmap('sitting_man.webp'))
-        self.left_image.setFixedSize(100, 100)
+        self.left_image.setFixedSize(1000, 1000)
         self.layout.addWidget(self.right_image)
 
         # Add the layout to the opening page

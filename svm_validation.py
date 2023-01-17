@@ -10,17 +10,17 @@ import seaborn as sn
 svm_loaded_model = joblib.load('svm_Model_24.12.pkl')
 model = svm_loaded_model.best_estimator_
 # test values for the model
-x_test_scaled = joblib.load('svm_Model_X_test_scaled.csv')
+x_test_scaled = joblib.load('model/X_test_scaled.csv')
 # labels for the test values
-y_test = joblib.load('svm_Model_y_test.csv')
+y_test = joblib.load('model/y_test.csv')
 label_test = pd.Series(y_test).array
 label_prediction = model.predict(x_test_scaled)
 # print(label_prediction)
  
-confusion_matrix = metrics.confusion_matrix(label_prediction,label_test, labels=["Low", "Meduim", "High"])
-reported = metrics.classification_report(label_prediction,label_test,labels=["Low", "Meduim", "High"])
+confusion_matrix = metrics.confusion_matrix(label_prediction,label_test, labels=["Low", "Medium", "High"])
+reported = metrics.classification_report(label_prediction,label_test,labels=["Low", "Medium", "High"])
 print(reported)
-cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = ["Low", "Meduim", "High"])
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = ["Low", "Medium", "High"])
 
 cm_display.plot()
 plt.show()
@@ -43,11 +43,11 @@ for true,pred in zip(label_test,label_prediction):
 
     if true == 'Low' and pred == 'Low' :
         TP += 1
-    elif (pred == 'Meduim' or pred == 'High') and (true == 'Meduim' or true == 'High'):
+    elif (pred == 'Medium' or pred == 'High') and (true == 'Medium' or true == 'High'):
         TN += 1
-    elif pred == 'Low' and (true == 'Meduim' or true == 'High'):
+    elif pred == 'Low' and (true == 'Medium' or true == 'High'):
         FP += 1
-    elif (pred == 'Meduim' or pred == 'High') and true == 'Low':
+    elif (pred == 'Medium' or pred == 'High') and true == 'Low':
         FN += 1
 
 
@@ -79,13 +79,13 @@ for true,pred in zip(label_test,label_prediction):
       
 
     # 2 - positive, 3 - negative
-    if true == 'Meduim' and pred == 'Meduim' :
+    if true == 'Medium' and pred == 'Medium' :
         TP += 1
     elif (pred == 'Low' or pred == 'High') and (true == 'Low' or true == 'High'):
         TN += 1
-    elif pred == 'Meduim' and (true == 'Low' or true == 'High'):
+    elif pred == 'Medium' and (true == 'Low' or true == 'High'):
         FP += 1
-    elif (pred == 'Low' or pred == 'High') and true == 'Meduim':
+    elif (pred == 'Low' or pred == 'High') and true == 'Medium':
         FN += 1
 
 
@@ -120,11 +120,11 @@ for true,pred in zip(label_test,label_prediction):
     # 2 - positive, 3 - negative
     if true == 'High' and pred == 'High' :
         TP += 1
-    elif (pred == 'Low' or pred == 'Meduim') and (true == 'Low' or true == 'Meduim'):
+    elif (pred == 'Low' or pred == 'Medium') and (true == 'Low' or true == 'Medium'):
         TN += 1
-    elif pred == 'High' and (true == 'Low' or true == 'Meduim'):
+    elif pred == 'High' and (true == 'Low' or true == 'Medium'):
         FP += 1
-    elif (pred == 'Low' or pred == 'Meduim') and true == 'High':
+    elif (pred == 'Low' or pred == 'Medium') and true == 'High':
         FN += 1
 
 
