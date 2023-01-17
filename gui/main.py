@@ -28,7 +28,7 @@ class MyWindow(QWidget):
         # Create a QPalette object
         palette = QPalette()
         # Load the image and create a QBrush object with it
-        image = QImage(QPixmap("heart-attack.png"))
+        image = QImage(QPixmap("gui/heart-attack.png"))
         #brush = QBrush()
         pixmap = QPixmap(image)
        

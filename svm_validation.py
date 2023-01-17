@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sn
 
 # load the model
-svm_loaded_model = joblib.load('svm_Model_24.12.pkl')
+svm_loaded_model = joblib.load('model/svm_model.pkl')
 model = svm_loaded_model.best_estimator_
 # test values for the model
 x_test_scaled = joblib.load('model/X_test_scaled.csv')
