@@ -18,57 +18,40 @@ class MyWindow(QWidget):
         self.opening_page = QWidget()
         #create title label
         self.title_label = QLabel(self)
-        self.title_label.setGeometry(45,150,400,120)
+        self.title_label.setGeometry(50,10,420,350)
         self.text_edit=QTextEdit()
-        # font = QFont("Segoe UI ", 10)
-        # # Set the font of the QLabel widget
-        # self.title_label.setFont(font)
-       
-        # Set the text of the QLabel widget
-        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.title_label.setText("<h1>Welcome to CVD risk prediction App<h1>")
+        self.title_label.setText("<h1>Welcome To CVD Risk Prediction App<h1>")
         self.title_label.setWordWrap(True)
         self.set_font(self.title_label)
-        # self.title_label.setStyleSheet("color: #E3DECB;")
+
         # Create a QPalette object
         palette = QPalette()
         # Load the image and create a QBrush object with it
         image = QImage(QPixmap("gui/heart-attack.png"))
         #brush = QBrush()
         pixmap = QPixmap(image)
-       
         brush = QBrush(pixmap)
         # Set the brush as the background for the palette
         brush.setTextureImage(image)
-
-        # Disable repeating
-        #brush.setTextureRepeat(False)
-
         # Set the brush as the background for the palette
         palette.setBrush(QPalette.Background, brush)
-        brush.setTransform(QTransform().scale(1,1))
         # Apply the palette to the application
         self.opening_page.setPalette(palette)
-        self.opening_page.setAutoFillBackground(True)
-        self.opening_page.setStyleSheet("position : 100px ;")
-        self.opening_button = QPushButton('Go to prediction', self.opening_page)
-        # Set the button location and size
-        self.opening_button.setGeometry(160, 400, 150, 40)
-        self.opening_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #EEEEEA")
-        self.opening_button.clicked.connect(self.go_to_main_page)
-        # Create the main page
-        self.main_page = QWidget()
         
-        # Create a button to open the file dialog
-        self.open_csv_button = QPushButton('Load CSV file', self)
-        self.open_csv_button.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #FFFFFF")
+        self.opening_page.setAutoFillBackground(True)
+        self.opening_button = QPushButton('Go To Prediction', self.opening_page)
+        self.set_button_style(self.opening_button)
+        self.opening_button.clicked.connect(self.go_to_main_page)
+
+        self.main_page = QWidget()
+        self.open_csv_button = QPushButton('Load CSV File', self)
+        self.set_button_style(self.open_csv_button)
         self.open_csv_button.clicked.connect(self.open_csv)
         
-        self.back_to_open_screen= QPushButton('Back to main screen', self)
-        self.back_to_open_screen.setStyleSheet("font: 9pt Segoe UI Semibold; background-color: #FFFFFF")
+        self.back_to_open_screen= QPushButton('Back To Main', self)
+        self.set_button_style(self.back_to_open_screen)
         self.back_to_open_screen.clicked.connect(self.go_back_to_open_screen)
-       
-        #add label for descriptin
+
         self.desc_label = QLabel(self)
         self.desc_label.setText("""Select data sheet of format type 'CSV' to load your data. \nAfter loading the data, a risk category will be presented based on your data""")
         self.set_font(self.desc_label)
@@ -78,15 +61,10 @@ class MyWindow(QWidget):
         
         #result_label
         self.res_label = QLabel(self)
-        # self.res_label.setStyleSheet("font: 14pt Segoe UI bold; background-color: #E3DECB")
-        
-        # Create a table view and a model
-        #self.table_view = QTableView()
         self.model = QStandardItemModel(self)
     
         # Create a layout and add the table view and button
         layout = QVBoxLayout(self.main_page)
-        # layout.addWidget(self.table_view)
         layout.addWidget(self.desc_label)
         layout.addWidget(self.open_csv_button)
         layout.addWidget(self.back_to_open_screen)
@@ -117,9 +95,6 @@ class MyWindow(QWidget):
             # Load the CSV file into a Pandas DataFrame
             data = joblib.load(file_name)
 
-            # Preprocess the data
-            # ...
-
             # Insert the data into the model and train it
             svm_loaded_model = joblib.load('model/svm_model.pkl')
             model = svm_loaded_model.best_estimator_
@@ -129,20 +104,29 @@ class MyWindow(QWidget):
             pred = model.predict(data)
 
             pred_result = ', '.join(pred)
-            self.res_label.setText(" Your predicted risk category is: \n " + pred_result)
+            self.res_label.setText(" Your predicted\nrisk category: \n " + pred_result)
+            self.res_label.setGeometry(100,200,420,5000)
             self.setResultBackgroundColor(self.res_label,pred_result)
             self.set_font(self.res_label)
 
             
             self.model.clear()
 
+    def set_button_style(self,widget):
+        widget.setFixedHeight(50)
+        widget.setFixedWidth(460)
+
+        font = QtGui.QFont("Caliberi", 15)
+        font.setBold(True)
+        widget.setFont(font)
+        widget.setStyleSheet("background-color: #B2C1FF; border: solid #000000 100px; border-radius: 10px; text-align: center; text-align: center;color: white;")
+        widget.move(7, 400)
+
     def set_font(self,widget):
         font = QtGui.QFont()
-        # font.setFamily('cursive')
         font.setPointSize(20)
         font.setBold(True)
-        font.setItalic(True)
-
+        font.setFamily('Caliberi')
         widget.setFont(font)
         widget.setStyleSheet("color: #FFFFFF;")
         widget.setAlignment(QtCore.Qt.AlignCenter)
@@ -159,7 +143,6 @@ class MyWindow(QWidget):
          self.title_label.show()
 
     def setResultBackgroundColor(self,window,color):
-        #change typo in meduim
         color_dict = {
             "Low": "#9ED6A5",
             "Medium": "#FFE4B0",

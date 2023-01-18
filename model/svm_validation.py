@@ -17,8 +17,8 @@ label_test = pd.Series(y_test).array
 label_prediction = model.predict(x_test_scaled)
 # print(label_prediction)
  
-confusion_matrix = metrics.confusion_matrix(label_prediction,label_test, labels=["Low", "Medium", "High"])
-reported = metrics.classification_report(label_prediction,label_test,labels=["Low", "Medium", "High"])
+confusion_matrix = metrics.confusion_matrix(label_test, label_prediction, labels=["Low", "Medium", "High"])
+reported = metrics.classification_report(label_test,label_prediction,labels=["Low", "Medium", "High"])
 print(reported)
 cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = ["Low", "Medium", "High"])
 
