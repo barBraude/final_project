@@ -9,6 +9,7 @@ To get starts please follow the steps below:
 
 # Clone The project
 Open the terminal and copy this command 
+
 (if the terminal is not recognize the command , please download git to your computer)
 
 `git clone https://github.com/barBraude/final_project.git`
@@ -24,9 +25,9 @@ Open the terminal and copy this command
 ## Prediction
 ### Create Python environment
 
-Create and activate the virtual environment (for Windows)
+Create and activate the virtual environment (for Windows).
 
-we use version 3.10
+We used version 3.10.
 
 1. `py -3 -m venv .venv`
 2. `.venv\scripts\activate`
