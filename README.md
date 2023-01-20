@@ -1,15 +1,16 @@
-# Final Project
+# Final Project - Prediction Of Diseases Following A Sedentary Lifestyle
 
 The main goal of this project is to be able to predict the risk of having a cardiovascular disease based physical activity and sitting habits as well as other health factors.
 The data used in this project will be subjected to a process of cleaning and scaling, then supervised algorithms such as SVM, Logistic Regression, Random Forest and Knn will be implemented. 
 The solution will be presented in percentages and the data will be categorized into 3 groups of risk severity: High-Risk, Medium-Risk, and Low-Risk.
 
+The analysis relies on data from the UK Biobank (https://www.ukbiobank.ac.uk/)
 **For more information about our research : https://pubmed.ncbi.nlm.nih.gov/32532775/**
 
 ## Get Started
 To get starts please follow the steps below:
 
-# Clone The project
+## Clone The project
 Open the terminal and copy this command 
 
 (if the terminal is not recognize the command , please download git to your computer)
@@ -25,7 +26,7 @@ Open the terminal and copy this command
 5. In the top menu `Runtime` --> `Run all`
 
 ## Prediction
-### Create Python environment
+### Create Python Environment
 
 Create and activate the virtual environment (for Windows)
 
@@ -39,6 +40,7 @@ We used version 3.10
 6. Run main.py
 
 For more information :  https://code.visualstudio.com/docs/python/python-tutorial#_install-and-use-packages
+
 
 
 
