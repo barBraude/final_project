@@ -4,6 +4,8 @@ The main goal of this project is to be able to predict the risk of having a card
 The data used in this project will be subjected to a process of cleaning and scaling, then supervised algorithms such as SVM, Logistic Regression, Random Forest and Knn will be implemented. 
 The solution will be presented in percentages and the data will be categorized into 3 groups of risk severity: High-Risk, Medium-Risk, and Low-Risk.
 
+**For more information about our research : https://pubmed.ncbi.nlm.nih.gov/32532775/**
+
 ## Get Started
 To get starts please follow the steps below:
 
