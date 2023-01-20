@@ -1,7 +1,7 @@
 # Final Project
 
 The main goal of this project is to be able to predict the risk of having a cardiovascular disease based physical activity and sitting habits as well as other health factors.
-The data used in this project will be subjected to a process of cleaning and scaling, then supervised algorithms such as SVM, logistic regression, Random Forest, Knn will be implemented. 
+The data used in this project will be subjected to a process of cleaning and scaling, then supervised algorithms such as SVM, Logistic Regression, Random Forest and Knn will be implemented. 
 The solution will be presented in percentages and the data will be categorized into 3 groups of risk severity: High-Risk, Medium-Risk, and Low-Risk.
 
 ## Get Started
