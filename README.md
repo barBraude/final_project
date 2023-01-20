@@ -25,9 +25,9 @@ Open the terminal and copy this command
 ## Prediction
 ### Create Python environment
 
-Create and activate the virtual environment (for Windows).
+Create and activate the virtual environment (for Windows)
 
-We used version 3.10.
+We used version 3.10
 
 1. `py -3 -m venv .venv`
 2. `.venv\scripts\activate`
