@@ -81,7 +81,7 @@ class MyWindow(QWidget):
         layout.addWidget(self.stacked_widget)
 
         # Set the application icon
-        app.setWindowIcon(QIcon("heart.png")) 
+        app.setWindowIcon(QIcon("gui/heart.png")) 
 
     
     def open_csv(self):
